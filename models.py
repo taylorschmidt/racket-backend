@@ -1,5 +1,5 @@
 from peewee import *
-import datetime
+from datetime import datetime, date
 from flask_login import UserMixin
 
 DATABASE = PostgresqlDatabase('rackets', host='localhost', port=5432)
@@ -14,8 +14,27 @@ class Person(UserMixin, BaseModel):
     password = CharField()
     
 class Singles(BaseModel):
+    person = ForeignKeyField(Person, backref='single')
+    date = DateField(
+        formats="%d/%m/%Y",
+        default=date.today
+    )
+    opponent = CharField()
+    score = CharField()
+    notes = TextField()
 
 class Doubles(BaseModel):
+    person = ForeignKeyField(Person, backref='double')
+    date = DateField(
+        formats="%d/%m/%Y",
+        default=date.today
+    )
+    opponent = CharField()
+    partner = CharField()
+    hand = CharField()
+    score = CharField()
+    change = BooleanField()
+    notes = TextField()
 
 def initialize():
     DATABASE.connect()
