@@ -1,6 +1,4 @@
 from flask import Flask, request, jsonify, g, session, make_response
-from flask_session import Session
-from redis import Redis
 from flask_cors import CORS
 from flask_login import LoginManager
 
