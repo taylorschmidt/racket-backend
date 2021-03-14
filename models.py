@@ -21,7 +21,9 @@ class Singles(BaseModel):
     )
     opponent = CharField()
     score = CharField()
+    win = BooleanField()
     notes = TextField()
+    
 
 class Doubles(BaseModel):
     person = ForeignKeyField(Person, backref='double')
@@ -33,6 +35,7 @@ class Doubles(BaseModel):
     partner = CharField()
     hand = CharField()
     score = CharField()
+    win = BooleanField()
     change = BooleanField()
     notes = TextField()
 
