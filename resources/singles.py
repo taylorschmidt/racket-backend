@@ -27,3 +27,29 @@ def get_singles_matches():
         return jsonify(data=matches, status={"code": 200, "message": "Successfully pulled all signals matches for this user."})
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 401, "message":"Error getting the singles matches."})
+
+@singles.route('/<singles_id>', methods=["PUT"])
+@login_required
+def update_singles_match(singles_id):
+    try:
+        payload = request.get_json()
+        query = models.Singles.update(**payload)\
+                .where(models.Singles.id==singles_id)
+        query.execute()
+        updated_match = model_to_dict(models.Singles.get_by_id(singles_id))
+        return jsonify(data=updated_match, status={"code": 200, "message": "Successfully updated the singles match."})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={"code": 404,\
+                                        "message": "Error getting the singles match."})
+
+
+@singles.route('/<singles_id>', methods=["DELETE"])
+@login_required
+def delete_singles_match(singles_id):
+    try:
+        delete_match = models.Singles.get_by_id(singles_id)
+        delete_match.delete_instance()
+        return jsonify(data={}, status={"code": 200, "message": "Singles match successfully deleted"})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={"code": 404,\
+                                        "message": "Singles match does not exist"})
