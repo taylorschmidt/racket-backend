@@ -19,10 +19,10 @@ class Singles(BaseModel):
         formats="%d/%m/%Y",
         default=date.today
     )
-    opponent = CharField()
-    score = CharField()
+    opponent = CharField(null = True)
+    score = CharField(null = True)
     win = BooleanField()
-    notes = TextField()
+    notes = TextField(null = True)
     
 
 class Doubles(BaseModel):
@@ -31,13 +31,13 @@ class Doubles(BaseModel):
         formats="%d/%m/%Y",
         default=date.today
     )
-    opponent = CharField()
-    partner = CharField()
+    opponent = CharField(null = True)
+    partner = CharField(null = True)
     hand = CharField()
-    score = CharField()
+    score = CharField(null = True)
     win = BooleanField()
-    change = BooleanField()
-    notes = TextField()
+    change = BooleanField(null = True)
+    notes = TextField(null = True)
 
 def initialize():
     DATABASE.connect()
