@@ -53,3 +53,14 @@ def delete_singles_match(singles_id):
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 404,\
                                         "message": "Singles match does not exist"})
+
+@singles.route('/<singles_id>', methods=["GET"])
+@login_required
+def get_mood(singles_id):
+    try:
+        match = models.Mood.get_by_id(singles_id)
+        match_dict = model_to_dict(match)
+        return jsonify(data=match_dict, status={"code": 200, "message": "Successfully grabbed single singles match"})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={"code": 404,\
+                                        "message": "Error getting the singles match"})
