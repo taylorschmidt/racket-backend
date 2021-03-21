@@ -55,7 +55,7 @@ def hello_world():
 
 
 CORS(app,\
-     origins=['http://localhost:3000', 'https://courtside-api.herokuapp.com/' ],\
+     origins=['http://localhost:3000', 'https://courtside-api.herokuapp.com/', 'https://courtside.vercel.app/' ],\
      supports_credentials=True)
 
 app.register_blueprint(singles, url_prefix='/api/v1/singles')
