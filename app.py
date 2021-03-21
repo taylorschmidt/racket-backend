@@ -24,7 +24,6 @@ login_manager = LoginManager() # in JS -- const loginManager = new LoginManager(
 login_manager.init_app(app) # initialize the new LoginManager instance in our app
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
     try:
@@ -56,7 +55,7 @@ def hello_world():
 
 
 CORS(app,\
-     origins=['http://localhost:3000'],\
+     origins=['http://localhost:3000', 'https://courtside-api.herokuapp.com/' ],\
      supports_credentials=True)
 
 app.register_blueprint(singles, url_prefix='/api/v1/singles')
