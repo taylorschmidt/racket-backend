@@ -52,3 +52,13 @@ def delete_doubles_match(doubles_id):
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 404,\
                                         "message": "Doubles match does not exist"})
+
+@doubles.route('/<doubles_id>', methods=["GET"])
+def get_doubles(doubles_id):
+    try:
+        match = models.Doubles.get_by_id(doubles_id)
+        match_dict = model_to_dict(match)
+        return jsonify(data=match_dict, status={"code": 200, "message": "Successfully grabbed single doubles match"})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={"code": 404,\
+                                        "message": "Error getting the doubles match"})
